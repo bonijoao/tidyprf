@@ -1,0 +1,154 @@
+# Guia de Boas Práticas para Desenvolvimento de Pacotes em R
+
+Este guia resume as principais diretrizes para criar pacotes robustos, documentados e alinhados aos padrões da comunidade (CRAN/rOpenSci).
+
+## 1. Nome e Metadados
+* **Nome:** Curto, descritivo e em letras minúsculas. Verifique disponibilidade e ofensividade com `pak::pkg_name_check()`.
+* **DESCRIPTION:** * Título em *Title Case* (sem ponto final).
+    * Descrição clara, sem começar com "Este pacote...".
+    * Listar autores com funções (`aut`, `cre`, `ctb`, `rev`) e incluir ORCID/ROR.
+* **Licença:** Use licenças aceitas pelo CRAN ou OSI (ex: MIT, GPL-3).
+
+## 2. API e Design de Funções
+* **Nomenclatura:** Prefira `snake_case`. Use o padrão `objeto_verbo()` (ex: `string_sort()`).
+* **Compatibilidade com Pipe:** O objeto de dados principal deve ser sempre o **primeiro argumento**.
+* **Ambiente Global:** Nunca importe dados ou faça atribuições ao ambiente global; as funções devem retornar objetos.
+* **Mensagens:** Use o pacote `cli` ou `message()`/`warning()`. Evite `print()` ou `cat()`. Forneça controle de verbosidade (ex: nível de debug).
+
+## 3. Documentação
+* **Roxygen2:** Use obrigatoriamente para gerar arquivos `.Rd` e o `NAMESPACE`.
+* **Conteúdo:**
+    * Documente todas as funções exportadas com `@return` e exemplos.
+    * Crie uma documentação geral do pacote (`?pacote`).
+    * Crie pelo menos uma **Vignette HTML** com casos de uso realistas.
+* **README:** Deve conter nome, badges, descrição, instruções de instalação e exemplo rápido de uso. Prefira gerar via `README.Rmd`.
+* **Citação:** Use `usethis::use_citation()` para criar um arquivo `CITATION` correto.
+
+## 4. Testes e Estilo
+* **Testes Unitários:** Use `testthat`. Mantenha cobertura acima de **75%**.
+* **Estilo:** Use os pacotes `styler` ou `air` para automatizar a formatação seguindo o *Tidyverse Style Guide*. Use `lintr` para identificar melhorias.
+* **Snapshots:** Use `vdiffr` para testar funções que geram gráficos.
+* **APIs Web:** Use `httptest2` ou `vcr` para simular interações HTTP e `skip_on_cran()` para testes que dependem de rede.
+
+## 5. Dependências e Infraestrutura
+* **Minimalismo:** Tenha o mínimo de dependências possível.
+* **Imports vs Depends:** Use `Imports` para funções necessárias e `Suggests` para pacotes usados apenas em testes, exemplos ou vignettes.
+* **Ferramentas Recomendadas:**
+    * HTTP: `httr2`, `curl` ou `crul`.
+    * JSON/XML: `jsonlite` e `xml2`.
+    * Dados Espaciais: `sf` (evite o antigo `sp`).
+
+## 6. Website e Divulgação
+* **Pkgdown:** Crie um site de documentação automático.
+* **Organização:** Agrupe funções relacionadas no índice usando a tag `@family` do roxygen2.
+* **Logotipo:** Adicione um logo via `usethis::use_logo()`.
+
+## 7. Controle de Versão (Git)
+* Use Git para rastreio de alterações.
+* Nomeie a branch principal como `main` (evite `master`).
+* Configure o `.Rbuildignore` e `.gitignore` corretamente (use `usethis::git_vaccinate()`).
+
+## 8. Check-list para o CRAN
+* [ ] Título em *Title Case*.
+* [ ] URLs na documentação entre `< >` e sem redirecionamentos (use `urlchecker`).
+* [ ] Exemplos rápidos e que não falhem sem internet.
+* [ ] Nomes de pacotes/softwares entre aspas simples (' ') na descrição.
+* [ ] Passar sem erros/avisos no `R CMD check`.
+
+
+# Boas Práticas de Integração Contínua (CI)
+
+## O que é Integração Contínua (CI)? 
+
+A Integração Contínua (CI) consiste na execução automatizada de testes sempre que o código de um software é alterado. No contexto da rOpenSci e do ecossistema R, isso significa que um conjunto de verificações (como o `R CMD check`) é disparado via GitHub toda vez que você faz um *commit* ou abre um *Pull Request*.
+
+## Por que usar Integração Contínua? {#why-use-continuous-integration-ci}
+
+O uso de CI é **obrigatório** para todos os pacotes rOpenSci. Os principais benefícios incluem:
+*   **Proteção do Código:** Garante que novas alterações não quebrem funcionalidades existentes.
+*   **Transparência:** Os resultados dos testes aparecem diretamente na página do Pull Request no GitHub.
+*   **Cobertura de Código:** Integra-se a serviços que mostram quais linhas do seu código estão sendo efetivamente testadas.
+
+### Quando o CI multi-plataforma é essencial?
+Embora recomendemos CI para todos os sistemas, ele é indispensável se o seu pacote contiver:
+*   Código compilado (C++, Fortran, etc.).
+*   Dependências em Java ou outras linguagens.
+*   Chamadas de sistema ou manipulação de caminhos de arquivos (*file system*).
+*   Processamento de texto complexo (para detectar problemas de codificação/encoding).
+
+## Serviços de CI Recomendados {#whichci}
+
+### GitHub Actions
+Atualmente, é a opção mais conveniente. É integrada ao GitHub e possui suporte de primeira classe através do pacote `{usethis}`.
+*   **Dica:** Utilize as ações mantidas pela comunidade R em [r-lib/actions](https://github.com/r-lib/actions/).
+*   **pkgcheck:** A rOpenSci fornece o [`ropensci-review-tools/pkgcheck-action`](https://github.com/ropensci-review-tools/pkgcheck-action) para que você possa verificar se o seu pacote cumpre todos os requisitos de revisão antes mesmo de submetê-lo.
+
+### Versões do R para Testes
+Exigimos que os pacotes sejam testados contra três versões do R:
+1.  **Release:** A versão atual estável.
+2.  **Oldrel:** A versão anterior.
+3.  **Devel:** A versão de desenvolvimento (para antecipar mudanças futuras no R base).
+
+## Cobertura de Testes (Test Coverage) {#coverage}
+
+A cobertura de testes indica a porcentagem do seu código que é executada pelos seus testes unitários.
+*   **Serviço Recomendado:** [Codecov](https://codecov.io/).
+*   **Como configurar:** Use `usethis::use_github_action("test-coverage")`.
+*   **Badge:** Adicione o selo de cobertura ao seu `README.md` para mostrar o status de saúde do projeto.
+
+## Serviços Adicionais da rOpenSci {#rodocsci}
+
+Após a transferência do seu repositório para a organização oficial da rOpenSci, você terá acesso a:
+
+1.  **OpenCPU:** Cada *push* será compilado no servidor OpenCPU, permitindo que suas funções sejam chamadas via API remota.
+2.  **Documentação Automática:** Um site `pkgdown` será gerado e atualizado automaticamente em `docs.ropensci.org/nome-do-pacote`.
+
+### Dicas para Documentação com Pkgdown
+Se o seu pacote precisa de credenciais ou APIs para rodar os exemplos na documentação, use a variável de ambiente `IN_PKGDOWN`:
+
+```r
+# No roxygen2 para exemplos
+#' @examplesIf identical(Sys.getenv("IN_PKGDOWN"), "true")
+
+# No setup das Vignettes
+knitr::opts_chunk$set(
+  eval = Sys.getenv("IN_PKGDOWN") == "true"
+)
+```
+
+# Práticas de Segurança no Desenvolvimento {#package-development-security-best-practices}
+
+
+## Segurança da Conta e do Repositório {#git-hub-access-security}
+
+*   **Autenticação de Dois Fatores (2FA):** É **obrigatória** para membros da rOpenSci. Ative-a no GitHub para proteger seu código contra acessos indevidos.
+*   **Gestão de Acessos:** Revise periodicamente quem tem permissão de escrita no repositório. Remova ex-colaboradores para manter o princípio do privilégio mínimo.
+*   **Protocolos:** Sempre prefira **HTTPS** sobre HTTP para todas as comunicações com serviços web.
+
+## Gerenciamento de Segredos (Credenciais) {#pkgsecrets}
+
+Ao lidar com chaves de API e tokens, o objetivo é nunca deixá-los expostos no código, no histórico ou em logs.
+
+### 1. Proteção do Usuário {#secrets-in-packages-and-user-protection}
+*   **Não use argumentos diretos:** Evite que o usuário passe a chave como uma string em uma função (isso fica registrado no `.Rhistory`).
+*   **Variáveis de Ambiente:** Oriente o usuário a usar o arquivo `.Renviron`. Ferramenta útil: `usethis::edit_r_environ()`.
+*   **Gerenciadores de Senhas:** Recomende o uso do pacote `keyring` para armazenar segredos no *keychain* do sistema operacional.
+*   **Silêncio é Segurança:** Garanta que seu pacote nunca imprima credenciais em mensagens de erro ou logs, mesmo em modo *verbose*.
+
+### 2. Proteção no Desenvolvimento e Testes {#secrets-in-packages-and-development}
+*   **Testes com Mock/Cache:** Ao usar `vcr` ou `httptest`, verifique os arquivos gerados (fitas/cassetes) para garantir que as chaves de API foram redigidas (apagadas) antes de fazer o commit.
+*   **CI (Integração Contínua):** Armazene chaves como "Secrets" nas configurações do repositório (ex: GitHub Actions Secrets). Nunca as coloque no arquivo `.yaml` do workflow.
+*   **Pull Requests Externos:** Lembre-se que segredos do GitHub Actions não ficam disponíveis para PRs vindos de *forks*. Planeje seus testes para ignorar (`skip`) etapas que exigem chaves nesses casos, ou use dados simulados.
+
+### 3. Submissão ao CRAN {#secrets-and-cran}
+*   **Pule Testes:** Use `testthat::skip_on_cran()` para qualquer teste que dependa de uma chave de API.
+*   **Vignettes:** Como os servidores do CRAN não possuem suas chaves, você deve:
+    *   Gerar as vignettes previamente (*precompute*).
+    *   Ou usar o pacote `vcr` para utilizar respostas em cache.
+
+
+
+
+
+
+

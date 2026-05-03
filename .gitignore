@@ -1,0 +1,20 @@
+# Dados brutos e processados (grandes demais para git)
+dados/brutos/
+dados/processados/
+
+# Parquets vão para GitHub Releases, não para git
+dados/consolidados/**/*.parquet
+
+# catalogo.json fica no git (pequeno, referência para o pacote)
+!dados/consolidados/catalogo.json
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Rprofile
+*.Rproj
+
+# OS
+.DS_Store
+Thumbs.db
