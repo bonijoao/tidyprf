@@ -1,0 +1,26 @@
+Package: tidyprf
+Title: Tidy Access to Brazilian Federal Highway Police (PRF) Data
+Version: 0.0.0.9000
+Authors@R:
+    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+Description: Provides tidy-formatted access to Brazilian Federal Highway
+    Police (PRF) open data: traffic accidents by person, accidents by
+    occurrence, and infractions. Data is downloaded from GitHub Releases
+    on demand and cached locally for reuse.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    httptest2,
+    testthat (>= 3.0.0),
+    withr
+Config/testthat/edition: 3
+Imports: 
+    arrow,
+    cli,
+    dplyr,
+    fs,
+    httr2,
+    purrr,
+    tibble
