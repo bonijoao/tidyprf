@@ -17,7 +17,7 @@ catalog_env <- new.env(parent = emptyenv())
       "x" = "HTTP {httr2::resp_status(resp)} from {url}"
     ))
   }
-  httr2::resp_body_json(resp)
+  httr2::resp_body_json(resp, check_type = FALSE)
 }
 
 catalog_get <- function() {
