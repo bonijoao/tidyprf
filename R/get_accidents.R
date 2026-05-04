@@ -45,7 +45,7 @@ get_crashes <- function(year, uf = NULL, br = NULL, severity = NULL) {
   sev_pt <- severity_to_pt(severity)
 
   paths <- vapply(year, function(y) fetch_parquet(dataset, y), character(1))
-  ds    <- arrow::open_dataset(paths)
+  ds    <- arrow::open_dataset(paths, format = "parquet")
 
   if (!is.null(uf))     ds <- dplyr::filter(ds, .data$uf %in% !!uf)
   if (!is.null(br))     ds <- dplyr::filter(ds, .data$br %in% !!as.integer(br))
