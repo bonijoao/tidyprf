@@ -18,37 +18,28 @@ armazenados em cache local após o primeiro download.
 
 ## Exemplo rápido
 
-Compare acidentes e infrações na BR-116 ao longo de 2024:
+Mapeie acidentes fatais por estado brasileiro em 2024:
 
 ```r
 library(tidyprf)
+library(geobr)
 library(dplyr)
 library(ggplot2)
-library(lubridate)
 
-# Acidentes na BR-116 em 2024 (uma linha por pessoa envolvida)
-acid <- get_accidents(2024, br = 116) |>
-  mutate(mes = month(data_inversa)) |>
-  count(mes, name = "acidentes")
+fatal <- get_crashes(2024, severity = "fatal") |>
+  count(uf, name = "acidentes")
 
-# Infrações na BR-116 em 2024 — filtre antes do collect(), arquivos têm ~243 MB
-infr <- get_violations(2024, br = 116) |>
-  collect() |>
-  mutate(mes = month(dat_infracao)) |>
-  count(mes, name = "infracoes")
-
-# Comparação mensal
-left_join(acid, infr, by = "mes") |>
-  tidyr::pivot_longer(-mes, names_to = "tipo", values_to = "n") |>
-  ggplot(aes(mes, n, color = tipo)) +
-  geom_line(linewidth = 1) +
-  geom_point() +
-  scale_x_continuous(breaks = 1:12, labels = c("Jan","Fev","Mar","Abr","Mai","Jun",
-                                                "Jul","Ago","Set","Out","Nov","Dez")) +
-  labs(title = "BR-116 em 2024: Acidentes vs. Infrações",
-       x = NULL, y = "Contagem", color = NULL) +
-  theme_minimal()
+read_state(year = 2020, showProgress = FALSE) |>
+  left_join(fatal, by = c("abbrev_state" = "uf")) |>
+  ggplot() +
+  geom_sf(aes(fill = acidentes), color = "white", linewidth = 0.3) +
+  scale_fill_distiller(palette = "Reds", direction = 1, name = "Acidentes") +
+  labs(title = "Acidentes fatais por estado (2024)") +
+  theme_void(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
 ```
+
+![](Logo/quick_example.png)
 
 ## Instalação
 

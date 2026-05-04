@@ -18,36 +18,28 @@ after the first download.
 
 ## Quick example
 
-Compare accidents and traffic violations on BR-116 throughout 2024:
+Map fatal accidents across Brazilian states in 2024:
 
 ```r
 library(tidyprf)
+library(geobr)
 library(dplyr)
 library(ggplot2)
-library(lubridate)
 
-# Accidents on BR-116 in 2024 (one row per person involved)
-acc <- get_accidents(2024, br = 116) |>
-  mutate(mes = month(data_inversa)) |>
-  count(mes, name = "acidentes")
+fatal <- get_crashes(2024, severity = "fatal") |>
+  count(uf, name = "acidentes")
 
-# Violations on BR-116 in 2024 — filter before collect(), files are ~243 MB
-vio <- get_violations(2024, br = 116) |>
-  collect() |>
-  mutate(mes = month(dat_infracao)) |>
-  count(mes, name = "infracoes")
-
-# Monthly comparison
-left_join(acc, vio, by = "mes") |>
-  tidyr::pivot_longer(-mes, names_to = "tipo", values_to = "n") |>
-  ggplot(aes(mes, n, color = tipo)) +
-  geom_line(linewidth = 1) +
-  geom_point() +
-  scale_x_continuous(breaks = 1:12, labels = month.abb) +
-  labs(title = "BR-116 in 2024: Accidents vs. Violations",
-       x = NULL, y = "Count", color = NULL) +
-  theme_minimal()
+read_state(year = 2020, showProgress = FALSE) |>
+  left_join(fatal, by = c("abbrev_state" = "uf")) |>
+  ggplot() +
+  geom_sf(aes(fill = acidentes), color = "white", linewidth = 0.3) +
+  scale_fill_distiller(palette = "Reds", direction = 1, name = "Accidents") +
+  labs(title = "Fatal accidents by state (2024)") +
+  theme_void(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
 ```
+
+![](Logo/quick_example.png)
 
 ## Installation
 
