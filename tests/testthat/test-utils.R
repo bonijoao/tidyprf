@@ -47,6 +47,29 @@ test_that("validate_year aborts on non-numeric input", {
   expect_error(validate_year("2023"), class = "rlang_error")
 })
 
+test_that("validate_year aborts on NA", {
+  expect_error(validate_year(NA_real_), class = "rlang_error")
+  expect_error(validate_year(c(2023, NA)), class = "rlang_error")
+})
+
+test_that("validate_year aborts on Inf and NaN", {
+  expect_error(validate_year(Inf), class = "rlang_error")
+  expect_error(validate_year(NaN), class = "rlang_error")
+})
+
+test_that("validate_year aborts on empty input", {
+  expect_error(validate_year(integer(0)), class = "rlang_error")
+  expect_error(validate_year(numeric(0)), class = "rlang_error")
+})
+
+test_that("dataset_from_pt returns NA for unknown PT names (intentional)", {
+  expect_true(is.na(dataset_from_pt("foo")))
+  expect_equal(
+    dataset_from_pt(c("acidentes", "foo", "datatran")),
+    c("accidents", NA, "crashes")
+  )
+})
+
 test_that("severity_to_pt maps all three values correctly", {
   expect_equal(severity_to_pt("fatal"),      "Com Vítimas Fatais")
   expect_equal(severity_to_pt("injured"),    "Com Vítimas Feridas")

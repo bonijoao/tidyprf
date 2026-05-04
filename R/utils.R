@@ -21,6 +21,8 @@ dataset_to_pt <- function(dataset) {
   unname(.dataset_pt_map[dataset])
 }
 
+# Returns NA for unknown PT names; callers (e.g. prf_cache) rely on this
+# to silently skip foreign parquet files in the cache dir.
 dataset_from_pt <- function(pt_name) {
   rev_map <- setNames(names(.dataset_pt_map), unname(.dataset_pt_map))
   unname(rev_map[pt_name])
@@ -32,8 +34,14 @@ cache_path <- function(dataset, year) {
 }
 
 validate_year <- function(year) {
-  if (!is.numeric(year) && !is.integer(year)) {
+  if (!is.numeric(year)) {
     cli::cli_abort("{.arg year} must be numeric, not {.type {year}}.")
+  }
+  if (length(year) == 0L) {
+    cli::cli_abort("{.arg year} must have length >= 1.")
+  }
+  if (any(!is.finite(year))) {
+    cli::cli_abort("{.arg year} must contain only finite values (no NA, NaN, or Inf).")
   }
   as.integer(unique(sort(year)))
 }
