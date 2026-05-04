@@ -18,3 +18,11 @@ dados/consolidados/**/*.parquet
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude Code internals
+.claude/
+
+# Scripts temporários de teste
+scripts/_test_*.R
+verify_temp.R
+prompt.txt

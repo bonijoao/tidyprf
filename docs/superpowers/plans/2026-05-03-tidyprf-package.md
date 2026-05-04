@@ -305,7 +305,7 @@ Create `tests/testthat/test-download.R`:
 test_that("catalog_get caches result in session env after first call", {
   catalog_env$catalog <- NULL  # reset session cache
 
-  withr::local_mocked_bindings(
+  testthat::local_mocked_bindings(
     .catalog_fetch = function() {
       list(datasets = list(
         accidents  = list(anos = 2023L, arquivos = list()),
@@ -1234,7 +1234,7 @@ test_that("prf_cache_clear returns invisibly", {
 
 test_that("prf_years returns tibble with English dataset names", {
   # Catalog uses Portuguese keys; prf_years exposes English names
-  withr::local_mocked_bindings(
+  testthat::local_mocked_bindings(
     catalog_get = function() list(datasets = list(
       acidentes = list(
         anos = 2023L,
@@ -1255,7 +1255,7 @@ test_that("prf_years returns tibble with English dataset names", {
 })
 
 test_that("prf_years filters by English dataset argument", {
-  withr::local_mocked_bindings(
+  testthat::local_mocked_bindings(
     catalog_get = function() list(datasets = list(
       acidentes = list(
         anos = 2023L,
