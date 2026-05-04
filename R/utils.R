@@ -49,9 +49,9 @@ validate_year <- function(year) {
 severity_to_pt <- function(severity) {
   if (is.null(severity)) return(NULL)
   map <- c(
-    "fatal"      = "Com Vítimas Fatais",
-    "injured"    = "Com Vítimas Feridas",
-    "no_victims" = "Sem Vítimas"
+    "fatal"      = "Com V\u00edtimas Fatais",
+    "injured"    = "Com V\u00edtimas Feridas",
+    "no_victims" = "Sem V\u00edtimas"
   )
   bad <- severity[!severity %in% names(map)]
   if (length(bad) > 0) {
