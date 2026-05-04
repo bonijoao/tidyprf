@@ -1,0 +1,56 @@
+cache_dir <- function() {
+  getOption("tidyprf.cache_dir", tools::R_user_dir("tidyprf", "cache"))
+}
+
+# Maps English public-API dataset names to the Portuguese keys used in
+# catalogo.json and Parquet filenames on GitHub Releases.
+.dataset_pt_map <- c(
+  "accidents"  = "acidentes",
+  "crashes"    = "datatran",
+  "violations" = "infracoes"
+)
+
+dataset_to_pt <- function(dataset) {
+  bad <- dataset[!dataset %in% names(.dataset_pt_map)]
+  if (length(bad) > 0) {
+    cli::cli_abort(c(
+      "Invalid {.arg dataset}: {.val {bad}}",
+      "i" = "Valid values: {.val {names(.dataset_pt_map)}}"
+    ))
+  }
+  unname(.dataset_pt_map[dataset])
+}
+
+dataset_from_pt <- function(pt_name) {
+  rev_map <- setNames(names(.dataset_pt_map), unname(.dataset_pt_map))
+  unname(rev_map[pt_name])
+}
+
+cache_path <- function(dataset, year) {
+  pt_name <- dataset_to_pt(dataset)
+  fs::path(cache_dir(), paste0(pt_name, "_", year, ".parquet"))
+}
+
+validate_year <- function(year) {
+  if (!is.numeric(year) && !is.integer(year)) {
+    cli::cli_abort("{.arg year} must be numeric, not {.type {year}}.")
+  }
+  as.integer(unique(sort(year)))
+}
+
+severity_to_pt <- function(severity) {
+  if (is.null(severity)) return(NULL)
+  map <- c(
+    "fatal"      = "Com Vítimas Fatais",
+    "injured"    = "Com Vítimas Feridas",
+    "no_victims" = "Sem Vítimas"
+  )
+  bad <- severity[!severity %in% names(map)]
+  if (length(bad) > 0) {
+    cli::cli_abort(c(
+      "Invalid {.arg severity}: {.val {bad}}",
+      "i" = "Valid values: {.val {names(map)}}"
+    ))
+  }
+  unname(map[severity])
+}
