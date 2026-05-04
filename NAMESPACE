@@ -3,4 +3,7 @@
 export(get_accidents)
 export(get_crashes)
 export(get_violations)
+export(info_accidents)
+export(info_crashes)
+export(info_violations)
 importFrom(rlang,.data)
