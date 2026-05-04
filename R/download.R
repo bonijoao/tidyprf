@@ -3,7 +3,7 @@ catalog_env <- new.env(parent = emptyenv())
 # Separated so tests can mock it without mocking httr2 directly
 .catalog_fetch <- function() {
   url <- paste0(
-    "https://raw.githubusercontent.com/bonijoao/tidyprf/main/",
+    "https://raw.githubusercontent.com/bonijoao/tidyprf/master/",
     "dados/consolidados/catalogo.json"
   )
   resp <- httr2::request(url) |>
