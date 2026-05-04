@@ -1,1 +1,0 @@
-install.packages(c("rvest", "stringr", "purrr", "googledrive"))
