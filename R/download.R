@@ -49,11 +49,15 @@ fetch_parquet <- function(dataset, year) {
   }
 
   cli::cli_inform(c("i" = "Downloading {filename} ({info$tamanho_mb} MB)..."))
-  fs::dir_create(fs::path_dir(dest), recurse = TRUE)
+  fs::dir_create(fs::path_dir(dest))
+
+  tmp <- paste0(dest, ".part")
+  on.exit(if (fs::file_exists(tmp)) fs::file_delete(tmp), add = TRUE)
 
   httr2::request(info$url) |>
     httr2::req_progress() |>
-    httr2::req_perform(path = dest)
+    httr2::req_perform(path = tmp)
 
+  fs::file_move(tmp, dest)
   dest
 }

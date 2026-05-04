@@ -2,7 +2,8 @@
 # fetch_parquet() tests use a real temp dir to test the cache-hit path
 
 test_that("catalog_get caches result in session env after first call", {
-  catalog_env$catalog <- NULL  # reset session cache
+  catalog_env$catalog <- NULL
+  withr::defer(catalog_env$catalog <- NULL)
 
   testthat::local_mocked_bindings(
     .catalog_fetch = function() {
@@ -23,9 +24,9 @@ test_that("catalog_get caches result in session env after first call", {
 
 test_that("catalog_get returns cached value on second call without HTTP", {
   catalog_env$catalog <- list(datasets = list(test = TRUE))
+  withr::defer(catalog_env$catalog <- NULL)
   result <- catalog_get()
   expect_true(result$datasets$test)
-  catalog_env$catalog <- NULL
 })
 
 test_that("fetch_parquet returns existing cached file without HTTP", {
@@ -43,18 +44,17 @@ test_that("fetch_parquet returns existing cached file without HTTP", {
 test_that("fetch_parquet aborts when year not in catalog", {
   catalog_env$catalog <- list(
     datasets = list(
-      acidentes = list(            # Portuguese key in catalog
+      acidentes = list(
         anos = 2023L,
-        arquivos = list()          # no 2021 entry
+        arquivos = list()
       )
     )
   )
+  withr::defer(catalog_env$catalog <- NULL)
 
   withr::with_tempdir({
     withr::with_options(list(tidyprf.cache_dir = getwd()), {
       expect_error(fetch_parquet("accidents", 2021), class = "rlang_error")
     })
   })
-
-  catalog_env$catalog <- NULL
 })
