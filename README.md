@@ -1,4 +1,4 @@
-# tidyprf <img src="img/logo.png" align="right" height="150" />
+# tidy**prf** <img src="img/logo.png" style="float: right;" height="150" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)

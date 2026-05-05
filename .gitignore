@@ -26,3 +26,5 @@ Thumbs.db
 scripts/_test_*.R
 verify_temp.R
 prompt.txt
+
+/.quarto/
