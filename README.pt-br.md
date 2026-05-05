@@ -1,20 +1,14 @@
-# tidyprf <img src="Logo/logo_tidyprf.png" align="right" height="139" />
+# tidyprf <img src="img/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![R-CMD-check](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 *[Read in English](README.md)*
 
-O **tidyprf** oferece acesso direto aos dados de segurança viária da Polícia
-Rodoviária Federal (PRF) — acidentes por pessoa, acidentes por ocorrência e
-infrações de trânsito — diretamente no R. Sem downloads manuais, sem navegar
-em portais do governo: escolha o dataset, o ano, e receba uma tabela limpa e
-pronta para análise.
+O **tidyprf** fornece acesso, a partir do R, aos conjuntos de dados públicos de segurança viária disponibilizados pela Polícia Rodoviária Federal (PRF). Estão incluídos dados de acidentes por pessoa, acidentes por ocorrência e infrações de trânsito.
 
-Os dados são distribuídos como arquivos Parquet via GitHub Releases e
-armazenados em cache local após o primeiro download.
+O pacote permite selecionar o conjunto e o ano desejado, retornando os dados em formato tabular. Os arquivos são distribuídos em formato Parquet por meio do GitHub Releases e armazenados em cache local após o primeiro download.
 
 ## Exemplo rápido
 

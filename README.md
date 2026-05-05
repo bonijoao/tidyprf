@@ -1,4 +1,4 @@
-# tidyprf <img src="Logo/logo_tidyprf.png" align="right" height="139" />
+# tidyprf <img src="img/logo.png" align="right" height="139" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
@@ -6,14 +6,9 @@
 
 *[Leia em Português](README.pt-br.md)*
 
-**tidyprf** gives you direct access to Brazilian Federal Highway Police (PRF)
-road safety data — traffic accidents by person, accidents by occurrence, and
-traffic violations — all from within R. No manual downloads, no navigating
-government portals: just pick a dataset, choose the year, and get a clean,
-analysis-ready tibble.
+**tidyprf** provides access, from R, to public road safety datasets made available by the Polícia Rodoviária Federal (PRF). These include data on accidents by person, accidents by occurrence, and traffic violations.
 
-Data is distributed as Parquet files via GitHub Releases and cached locally
-after the first download.
+The package allows users to select the desired dataset and year, returning the data in tabular format. Files are distributed in Parquet format via GitHub Releases and stored in a local cache after the first download.
 
 ## Quick example
 
@@ -38,7 +33,7 @@ read_state(year = 2020, showProgress = FALSE) |>
   theme(plot.title = element_text(hjust = 0.5, face = "bold"))
 ```
 
-![](Logo/quick_example.png)
+![](img/quick_example.png)
 
 ## Installation
 
