@@ -1,7 +1,8 @@
-# tidyprf <img src="img/logo.png" align="right" height="138" />
+# tidyprf <img src="img/logo.png" align="right" height="150" />
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
 *[Leia em Português](README.pt-br.md)*
