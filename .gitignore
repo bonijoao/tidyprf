@@ -1,0 +1,22 @@
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+.Rprofile
+*.Rproj
+
+# Vignettes / pkgdown build artifacts
+inst/doc
+/doc/
+/Meta/
+docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local development files (not part of the package)
+CLAUDE.md
+.claude/
+/.quarto/

@@ -1,0 +1,26 @@
+url: https://bonijoao.github.io/tidyprf/
+
+template:
+  bootstrap: 5
+
+reference:
+- title: Get data
+  desc: Download PRF datasets as tidy tibbles (cached locally after first use).
+  contents:
+  - get_accidents
+  - get_crashes
+  - get_violations
+
+- title: Variable descriptions
+  desc: Codebook for each dataset, in English or Portuguese.
+  contents:
+  - info_accidents
+  - info_crashes
+  - info_violations
+  - codebook
+
+- title: Catalog and cache
+  contents:
+  - prf_years
+  - prf_cache
+  - prf_cache_clear
