@@ -4,6 +4,10 @@
 
 * This is a new release, so win-builder reports the usual
   "CRAN incoming feasibility ... NOTE: New submission".
+* The "possibly misspelled" words flagged in that NOTE ("cia", "ria") are
+  fragments of "Polícia Rodoviária Federal" — the official Portuguese name
+  of the Brazilian Federal Highway Police — split by the spell checker at
+  the accented characters. They are not misspellings.
 
 ## Comments
 
