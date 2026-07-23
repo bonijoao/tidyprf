@@ -1,3 +1,8 @@
+# tidyprf 0.1.1
+
+* Use an absolute GitHub URL for the Portuguese README link in `README.md`
+  (fixes invalid file URI reported by CRAN).
+
 # tidyprf 0.1.0
 
 * Initial release.

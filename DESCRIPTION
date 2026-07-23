@@ -1,6 +1,6 @@
 Package: tidyprf
 Title: Tidy Access to Brazilian Federal Highway Police ('PRF') Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("João Paulo", "Assis Bonifácio", , "jpab.27@hotmail.com",
            role = c("aut", "cre"), comment = c(ORCID = "0009-0009-2335-8391")),

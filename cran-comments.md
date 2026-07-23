@@ -1,3 +1,16 @@
+## Resubmission
+
+This is a resubmission. In the previous submission (0.1.0), CRAN reported:
+
+    Found the following (possibly) invalid file URI:
+      URI: README.pt-br.md
+        From: README.md
+
+Fixed: the link to the Portuguese-language README (a file not shipped in the
+package tarball) now uses the absolute GitHub URL
+<https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md> instead of a
+relative file URI.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes

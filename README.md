@@ -14,7 +14,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 <!-- badges: end -->
 
-*[Leia em Português](README.pt-br.md)*
+*[Leia em
+Português](https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md)*
 
 **tidyprf** provides access, from R, to public road safety datasets made
 available by the Polícia Rodoviária Federal (PRF). These include data on
