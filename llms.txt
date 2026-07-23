@@ -1,7 +1,7 @@
 # tidyprf
 
 *[Leia em
-Português](https://bonijoao.github.io/tidyprf/README.pt-br.md)*
+Português](https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md)*
 
 **tidyprf** provides access, from R, to public road safety datasets made
 available by the Polícia Rodoviária Federal (PRF). These include data on
