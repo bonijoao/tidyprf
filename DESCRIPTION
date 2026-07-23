@@ -1,5 +1,5 @@
 Package: tidyprf
-Title: Tidy Access to Brazilian Federal Highway Police (PRF) Data
+Title: Tidy Access to Brazilian Federal Highway Police ('PRF') Data
 Version: 0.1.0
 Authors@R: c(
     person("João Paulo", "Assis Bonifácio", , "jpab.27@hotmail.com",
@@ -7,8 +7,8 @@ Authors@R: c(
     person("Geraldo Magela", "da Cruz Pereira", role = "aut",
            comment = c(ORCID = "0000-0001-6280-4870")),
     person("Pedro", "Mambelli Fernandes", role = "aut"))
-Description: Download and read Brazilian Federal Highway Police (Polícia
-    Rodoviária Federal, PRF) open data on traffic accidents by person, by
+Description: Download and read Brazilian Federal Highway Police ('Polícia
+    Rodoviária Federal', 'PRF') open data on traffic accidents by person, by
     occurrence, and traffic violations
     <https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf>.
     Data are retrieved on demand as 'Parquet' files distributed via 'GitHub'

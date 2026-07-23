@@ -4,11 +4,11 @@
 \name{tidyprf-package}
 \alias{tidyprf}
 \alias{tidyprf-package}
-\title{tidyprf: Tidy Access to Brazilian Federal Highway Police (PRF) Data}
+\title{tidyprf: Tidy Access to Brazilian Federal Highway Police ('PRF') Data}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Download and read Brazilian Federal Highway Police (Polícia Rodoviária Federal, PRF) open data on traffic accidents by person, by occurrence, and traffic violations \url{https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf}. Data are retrieved on demand as 'Parquet' files distributed via 'GitHub' releases and cached locally for reuse.
+Download and read Brazilian Federal Highway Police ('Polícia Rodoviária Federal', 'PRF') open data on traffic accidents by person, by occurrence, and traffic violations \url{https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-da-prf}. Data are retrieved on demand as 'Parquet' files distributed via 'GitHub' releases and cached locally for reuse.
 }
 \seealso{
 Useful links:
