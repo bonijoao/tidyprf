@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tidyprf</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,8 +84,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install the development version from GitHub:</p>
+<p>Install the released version from CRAN:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidyprf"</span><span class="op">)</span></span></code></pre></div>
+<p>Or the development version from GitHub:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"bonijoao/tidyprf"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -143,10 +146,11 @@
 <h2 id="cache">Cache<a class="anchor" aria-label="anchor" href="#cache"></a>
 </h2>
 <p>Parquet files are cached locally after first download:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/prf_cache.html">prf_cache</a></span><span class="op">(</span><span class="op">)</span>               <span class="co"># show cached files and sizes</span></span>
 <span><span class="fu"><a href="reference/prf_cache_clear.html">prf_cache_clear</a></span><span class="op">(</span><span class="op">)</span>         <span class="co"># delete all cached files</span></span>
 <span><span class="fu"><a href="reference/prf_years.html">prf_years</a></span><span class="op">(</span><span class="st">"accidents"</span><span class="op">)</span>    <span class="co"># available years and row counts per dataset</span></span></code></pre></div>
+<p>The data repository is updated weekly with new PRF releases. When a cached year has a newer version, it is downloaded again automatically; offline, the cached copy is used. To turn this check off, use <code>options(tidyprf.check_updates = FALSE)</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="data-source">Data source<a class="anchor" aria-label="anchor" href="#data-source"></a>
