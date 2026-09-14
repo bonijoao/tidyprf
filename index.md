@@ -40,14 +40,7 @@ read_state(year = 2020, showProgress = FALSE) |>
 
 ## Installation
 
-Install the released version from CRAN:
-
-``` r
-
-install.packages("tidyprf")
-```
-
-Or the development version from GitHub:
+Install the development version from GitHub:
 
 ``` r
 
@@ -87,11 +80,6 @@ prf_cache()               # show cached files and sizes
 prf_cache_clear()         # delete all cached files
 prf_years("accidents")    # available years and row counts per dataset
 ```
-
-The data repository is updated weekly with new PRF releases. When a
-cached year has a newer version, it is downloaded again automatically;
-offline, the cached copy is used. To turn this check off, use
-`options(tidyprf.check_updates = FALSE)`.
 
 ## Data source
 
