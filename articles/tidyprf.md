@@ -23,7 +23,9 @@ Data are stored as one Parquet file per dataset per year, hosted on
 GitHub Releases. The first time you request a year, the file is
 downloaded and cached locally (in
 `tools::R_user_dir("tidyprf", "cache")`); subsequent calls read from the
-cache and require no internet connection.
+cache. The data repository is updated weekly with new PRF releases: when
+online, tidyprf checks the catalog and re-downloads a cached year if a
+newer version was published. Offline, the cached copy is used as is.
 
 ## Downloading data
 
@@ -132,6 +134,13 @@ removes them (all of them, or a specific dataset/year):
 
 prf_cache_clear("violations", year = 2024)
 prf_cache_clear()  # everything
+```
+
+To always use the cached files without checking for newer versions, set:
+
+``` r
+
+options(tidyprf.check_updates = FALSE)
 ```
 
 ## Data sources
