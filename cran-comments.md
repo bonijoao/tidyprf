@@ -1,22 +1,13 @@
-## Resubmission
+## Update
 
-This is a resubmission. In the previous submission (0.1.0), CRAN reported:
-
-    Found the following (possibly) invalid file URI:
-      URI: README.pt-br.md
-        From: README.md
-
-Fixed: the link to the Portuguese-language README (a file not shipped in the
-package tarball) now uses the absolute GitHub URL
-<https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md> instead of a
-relative file URI.
+This is an update (0.1.1 -> 0.2.0). Cached data files are now refreshed when
+the online catalog lists a newer version. If the catalog cannot be reached or
+the download fails, the previously cached file is used, so the package keeps
+working offline.
 
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
-
-* This is a new release, so win-builder reports the usual
-  "CRAN incoming feasibility ... NOTE: New submission".
 
 ## Comments
 
@@ -25,7 +16,8 @@ relative file URI.
   they download multi-megabyte data files from the internet (GitHub Releases)
   or delete files from the user's cache directory.
 * All tests run offline: network access is mocked with `testthat`
-  local mocked bindings, and cached files are written to a temporary
+  local mocked bindings, the catalog update check is disabled in tests via the
+  `tidyprf.check_updates` option, and cached files are written to a temporary
   directory via the `tidyprf.cache_dir` option.
 * Downloaded data are cached in `tools::R_user_dir("tidyprf", "cache")`,
   in line with CRAN policy on persistent user data.
