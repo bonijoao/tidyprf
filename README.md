@@ -8,10 +8,10 @@
 [![R-CMD-check](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/tidyprf)](https://CRAN.R-project.org/package=tidyprf)
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![License:
 MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/tidyprf)](https://CRAN.R-project.org/package=tidyprf)
+
 <!-- badges: end -->
 
 *[Leia em
