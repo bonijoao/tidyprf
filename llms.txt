@@ -3,6 +3,8 @@
 *[Leia em
 Português](https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md)*
 
+![](reference/figures/logo.png)
+
 **tidyprf** provides access, from R, to public road safety datasets made
 available by the Polícia Rodoviária Federal (PRF). These include data on
 accidents by person, accidents by occurrence, and traffic violations.
@@ -101,10 +103,6 @@ portal](https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abe
 The consolidation pipeline that converts the raw CSV files into the
 Parquet files consumed by this package lives at
 [bonijoao/tidyprf-dados](https://github.com/bonijoao/tidyprf-dados).
-
-## License
-
-MIT
 
 # Package index
 
