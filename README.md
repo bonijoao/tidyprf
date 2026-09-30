@@ -1,8 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tidyprf <img src="man/figures/logo.png" align="right" height="150" />
-
+# tidyprf 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/bonijoao/tidyprf/actions/workflows/R-CMD-check.yaml)
@@ -16,6 +15,8 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 
 *[Leia em
 Português](https://github.com/bonijoao/tidyprf/blob/master/README.pt-br.md)*
+
+<img src="man/figures/logo.png" align="right" height="150" />
 
 **tidyprf** provides access, from R, to public road safety datasets made
 available by the Polícia Rodoviária Federal (PRF). These include data on
@@ -107,7 +108,3 @@ portal](https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abe
 The consolidation pipeline that converts the raw CSV files into the
 Parquet files consumed by this package lives at
 [bonijoao/tidyprf-dados](https://github.com/bonijoao/tidyprf-dados).
-
-## License
-
-MIT
